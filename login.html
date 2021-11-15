@@ -1,0 +1,43 @@
+{% extends 'base.html' %} 
+{% block title %}
+<title>
+Login View
+</title>
+{% endblock title %}
+
+{% block css %} .col-sm-4 { 
+    border:1px solid black;
+    border-radius:5px; 
+    padding:12px; 
+    margin-left:auto;
+    margin-right:auto;
+    } 
+    
+    {% endblock css %} 
+{% load crispy_forms_tags %} 
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <h2 style="text-align: center">Login</h2>
+      <hr>
+      <form  method="post" action="{% url 'login' %}" autocomplete = "off">
+        {% csrf_token %} {{ form | crispy }}
+        <br>
+          <button style="width: 100%" type="submit" class="btn btn-primary">
+            Login
+          </button>
+
+      </form>
+            <p style = "text-align:center;"><a href="{% url 'password_reset' %}">Lost password?</a></p>
+          <hr>
+          <a href="{% url 'register' %}" class="btn btn-success" style = "width:100%;">Create New Account</a>
+        
+    </div>
+  </div>
+  {% comment %} <a href = "{% url 'social:begin' 'github' %}">Login With Github</a><br> {% endcomment %}
+  {% comment %} <a href = "{% url 'social:begin' 'twitter' %}">Login With Twitter</a> {% endcomment %}
+  {% comment %} <a href = "{% url 'social:begin' 'facebook' %}">Login With Twitter</a> {% endcomment %}
+</div>
+
+{% endblock content %}

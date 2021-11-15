@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags%}
+{% block title %}
+<title>
+{{user.username}}
+</title>
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+<div class="row my-3">
+<h2 style = "text-align:center;">Edit your Profile</h2>
+<div class="col-sm-4">
+{% include 'registration/settings.html' %}
+</div>
+<div class="col-sm-8">
+<hr>
+{% if user.profile.images %}
+    <img src="{{ user.profile.images.url }}" style = "height:100px;width:100px;background-color:white;border-radius:50%;">
+{% else %}
+    <img src="#" style = "height:100px;width:100px;background-color:white;border-radius:50%;">
+
+{% endif %}
+<form method = "POST"  enctype = "multipart/form-data">
+{% csrf_token %}
+{{user_form | crispy }}<br> 
+{{profile_form | crispy}}<br> 
+
+<button type = "submit" class="btn btn-primary mb-3" >Save Changes</button>
+
+</form>
+
+</div>
+</div>
+</div>
+{% endblock content %}
